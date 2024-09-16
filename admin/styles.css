@@ -128,10 +128,27 @@ button a:hover {
     color: #f4dfd0;
 }
 
-.modifier {
+.detail {
     background-color: rgb(28, 136, 224);
 }
 
-.modifeir:hover {
+.detail:hover {
     background-color: rgb(11, 11, 197);
+}
+
+
+.modifier {
+    background-color: rgb(22, 221, 22);
+}
+
+.modifier:hover {
+    background-color: green;
+}
+
+.supprimer {
+    background-color: rgb(230, 46, 46);
+}
+
+.supprimer:hover {
+    background-color: red;
 }

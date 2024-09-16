@@ -50,9 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Connexion/Inscription</title>
 </head>
 <body>
-<form method="POST" action="reset_password.php">
-    <input type="email" name="email" placeholder="Entrer votre email" required>
-    <button type="submit">Envoyer</button>
-</form>
+<div class="container">
+    <form method="POST" action="reset_password.php">
+        <input type="email" name="email" placeholder="Entrer votre email" required>
+        <button type="submit">Envoyer</button>
+    </form>
+</div>
 </body>
 </html>

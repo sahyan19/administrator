@@ -39,10 +39,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Réinitialisation mot de passe</title>
 </head>
 <body>
-<form method="POST" action="reset_password_form.php">
-    <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
-    <input type="password" name="password" placeholder="Enter new password" required>
-    <button type="submit">Réinitialiser</button>
-</form>
+<div class="container">
+    <form method="POST" action="reset_password_form.php">
+        <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
+        <input type="password" name="password" placeholder="Enter new password" required>
+        <button type="submit">Réinitialiser</button>
+    </form><br><br>
+    <button><a href="../index.php">Connexion</a></button>
+</div>
 </body>
 </html>

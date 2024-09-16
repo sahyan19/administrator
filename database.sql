@@ -56,7 +56,7 @@ CREATE TABLE `etudiant` (
   `date_naissance` date DEFAULT NULL,
   `adresse` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +65,7 @@ CREATE TABLE `etudiant` (
 
 LOCK TABLES `etudiant` WRITE;
 /*!40000 ALTER TABLE `etudiant` DISABLE KEYS */;
-INSERT INTO `etudiant` VALUES (1,'Rakotomanga','Tahirihasina','Informatique','Homme','2024-09-13','Lot IVH 94');
+INSERT INTO `etudiant` VALUES (1,'Rakotomanga','Tahirihasina','Informatique','Homme','2024-09-13','Lot IVH 94'),(6,'Rakoto','Marie','Biologie','Femme','2004-09-03','Lot IVH 94 Ambodivona');
 /*!40000 ALTER TABLE `etudiant` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +143,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Tahirihasina','Rakotomanga','tahirihasinarakotomanga@gmail.com','$2y$10$JVCbHqe3kSgZC2fAzf44MOLC1t/ZWBje.DWNYrdaLA/MImaf2Z4sy',NULL,NULL),(2,'sahyan','Rakoto','sahyan@gmail.com','$2y$10$xPo8/t4yxe1Q/WX/IN7CV.oN9mr7l83iEkjQutfy9yqUGfgVmTHsi',NULL,NULL),(3,'sahyan','Rakoto','sahy@gmail.com','$2y$10$.Nm4pHfVopSJkr9iDB5zkO.xLRp4bqdlbOZcleKw/DHyjflHtU6Gu',NULL,NULL),(4,'Tsiorimbola Nathalie','Rakotoarisoa','natha@gmail.com','$2y$10$7uvqrlRjNuEOtLguDXOUDuUzAs1Ov7dT7tMn14lFtXkIuGb4/pNN6',NULL,NULL);
+INSERT INTO `users` VALUES (1,'Tahirihasina','Rakotomanga','tahirihasinarakotomanga@gmail.com','$2y$10$GBcyR/hmESBIzEsjFyZzi.GSSMS9.X1p09dKxUFVjfRwTGvaI28mi',NULL,NULL),(2,'sahyan','Rakoto','sahyan@gmail.com','$2y$10$xPo8/t4yxe1Q/WX/IN7CV.oN9mr7l83iEkjQutfy9yqUGfgVmTHsi',NULL,NULL),(3,'sahyan','Rakoto','sahy@gmail.com','$2y$10$.Nm4pHfVopSJkr9iDB5zkO.xLRp4bqdlbOZcleKw/DHyjflHtU6Gu',NULL,NULL),(4,'Tsiorimbola Nathalie','Rakotoarisoa','natha@gmail.com','$2y$10$7uvqrlRjNuEOtLguDXOUDuUzAs1Ov7dT7tMn14lFtXkIuGb4/pNN6',NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -156,4 +156,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-16 15:48:08
+-- Dump completed on 2024-09-16 15:58:33
