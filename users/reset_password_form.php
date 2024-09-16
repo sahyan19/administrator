@@ -19,17 +19,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'id' => $user['id']
         ]);
 
-        echo 'Your password has been reset successfully.';
+        echo 'Votre mot de passe a été réinitialiser avec succès';
     } else {
-        echo 'Invalid or expired token.';
+        echo 'Token Invalide ou expirer';
     }
 } elseif (isset($_GET['token'])) {
     $token = $_GET['token'];
 } else {
-    die('No token provided.');
+    die('Pas de token');
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,13 +36,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css">
-    <title>Connexion/Inscription</title>
+    <title>Réinitialisation mot de passe</title>
 </head>
 <body>
 <form method="POST" action="reset_password_form.php">
     <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
     <input type="password" name="password" placeholder="Enter new password" required>
-    <button type="submit">Reset Password</button>
+    <button type="submit">Réinitialiser</button>
 </form>
 </body>
 </html>

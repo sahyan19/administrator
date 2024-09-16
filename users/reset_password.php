@@ -2,6 +2,7 @@
 include('../admin/config.php');
 session_start();
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     
@@ -22,24 +23,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'email' => $email
         ]);
 
+        // Générer le lien de réinitialisation avec le token
+        $reset_link = 'http://localhost:8000/users/reset_password_form.php?token=' . urlencode($token);
+
         // Envoyer l'email de réinitialisation
-        $reset_link = 'http://localhost/reset_password_form.php?token=' . $token;
-        $subject = 'Password Reset';
-        $message = "Click the following link to reset your password: $reset_link";
-        $headers = 'From: no-reply@yourdomain.com' . "\r\n" .
-                   'Reply-To: no-reply@yourdomain.com' . "\r\n" .
+        $subject = 'Réinitialisation de mot de passe';
+        $message = "Cliquer ici pour réinitialiser votre mot de passe: $reset_link";
+        $headers = 'From: admin@gmail.com' . "\r\n" .
+                   'Reply-To: reset@gmail.com' . "\r\n" .
                    'X-Mailer: PHP/' . phpversion();
 
         mail($email, $subject, $message, $headers);
 
-        echo "un lien de réinitialisation est envoyer à votre email";
+        echo '<h2>Un lien de réinitialisation est envoyer à votre mail</h2>';
     } else {
-        echo "Pas de compte trouver avec cette email.";
+        echo '<h2>Pas de compte trouver avec cette email</h2>';
     }
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
