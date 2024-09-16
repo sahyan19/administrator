@@ -1,42 +1,44 @@
 <?php 
 include('../admin/config.php');
+session_start();
 
-function generateRandomString($length = 5){
-    $characters = '0123456789AZERTYUIOPQSDFGHJKLMWXCVBN';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++){
-        $randomString += $characters[rand(0, $charactersLength - 1)];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    
+    $stmt = $conn->prepare('SELECT id FROM users WHERE email = :email');
+    $stmt->execute(['email' => $email]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        // Générer un token sécurisé
+        $token = bin2hex(random_bytes(50));
+        $expires = date('Y-m-d H:i:s', strtotime('+1 hour'));
+
+        // Mettre à jour la base de données avec le token et l'expiration
+        $stmt = $conn->prepare('UPDATE users SET reset_token = :token, reset_token_expires = :expires WHERE email = :email');
+        $stmt->execute([
+            'token' => $token,
+            'expires' => $expires,
+            'email' => $email
+        ]);
+
+        // Envoyer l'email de réinitialisation
+        $reset_link = 'http://localhost/reset_password_form.php?token=' . $token;
+        $subject = 'Password Reset';
+        $message = "Click the following link to reset your password: $reset_link";
+        $headers = 'From: no-reply@yourdomain.com' . "\r\n" .
+                   'Reply-To: no-reply@yourdomain.com' . "\r\n" .
+                   'X-Mailer: PHP/' . phpversion();
+
+        mail($email, $subject, $message, $headers);
+
+        echo "un lien de réinitialisation est envoyer à votre email";
+    } else {
+        echo "Pas de compte trouver avec cette email.";
     }
-    return $randomString;
-}
-
-if (isset($_POST['send_link'])){
-    $email = $_POST['email'];
-
-
-    //vérifiaction de l'existance de l'email dans la base de données
-    $query = $conn->prepare('SELECT * FROM users WHERE email = ?');
-    $query->execute([$email]);
-    $row = $query->rowCount();
-
-    if ($row == 1){
-        $code = generateRandomString();
-
-
-        //ici le lien est comme celui ci car j'ai utiliser virtualhost
-        // ainsi j'ai utiiser sur mon ordinateur comme adresse du site : www.admin.mg
-        $link = 'href="http://www.admin.mg/check_email.php?email='.$email.'&code='.$code.'"';
-        
-        $link2 = '<span style="width:100%"><a style="padding: 100px; border-radius:30px; background:#a8edbc" '.$link.'> Lien </a></span>';
-
-        echo $link2;
-
-    }
-
-
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,17 +46,12 @@ if (isset($_POST['send_link'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css">
-    <title>Reset Password</title>
+    <title>Connexion/Inscription</title>
 </head>
 <body>
-    <div class="container">
-        <h2>Réinitialisation mot de passe </h2>
-        <div id="login-form">
-            <form action="check_email.php" method="POST">
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="submit" name="send_link" value="Envoyer">
-            </form>
-        </div>
-    </div>
+<form method="POST" action="reset_password.php">
+    <input type="email" name="email" placeholder="Entrer votre email" required>
+    <button type="submit">Envoyer</button>
+</form>
 </body>
 </html>

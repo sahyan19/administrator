@@ -40,7 +40,7 @@ session_start();
             </form><br><br>
         </div>
         <button><a href="/admin/index.php">Se Connecter en Admin</a></button><br><br>
-        <a href="/users/check_email.php">mot de passe oublié ?</a>
+        <a href="/users/reset_password.php">mot de passe oublié ?</a>
     </div>
 
     <script>
